@@ -12,7 +12,7 @@ type Feedback = { name: string; message: string; rating: number; createdAt: stri
   styleUrl: './app.component.css',
 })
 export class AppComponent {
-  title = 'Visszajelzés fal';
+  title = 'Visszajelzés fal (AWS Amplify)';
   name = '';
   message = '';
   rating = 5;
