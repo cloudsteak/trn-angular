@@ -1,0 +1,38 @@
+<div class="container">
+  <h1>{{ title }}</h1>
+
+  <form (ngSubmit)="add()" #f="ngForm" class="card">
+    <label>
+      Név
+      <input name="name" [(ngModel)]="name" required />
+    </label>
+
+    <label>
+      Üzenet
+      <textarea name="message" [(ngModel)]="message" rows="3" required></textarea>
+    </label>
+
+    <label>
+      Értékelés: {{ rating }}
+      <input type="range" min="1" max="10" [(ngModel)]="rating" name="rating" />
+    </label>
+
+    <button type="submit" [disabled]="!f.form.valid">Hozzáadás</button>
+    <button type="button" class="ghost" (click)="clearAll()" [disabled]="!feedbacks().length">
+      Összes törlése
+    </button>
+  </form>
+
+  <div *ngIf="!feedbacks().length" class="muted">Még nincs visszajelzés.</div>
+
+  <ul class="list">
+    <li *ngFor="let fb of feedbacks(); let i = index" class="item">
+      <div class="meta">
+        <strong>{{ fb.name }}</strong> · <span>⭐ {{ fb.rating }}</span>
+        <span class="time">{{ fb.createdAt | date:'yyyy.MM.dd HH:mm' }}</span>
+      </div>
+      <p>{{ fb.message }}</p>
+      <button class="danger" (click)="remove(i)">Törlés</button>
+    </li>
+  </ul>
+</div>
